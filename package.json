@@ -1,0 +1,30 @@
+{
+  "dependencies": {
+    "@prisma/client": "^5.8.1",
+    "apollo-server-express": "^3.13.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "graphql": "^16.8.1",
+    "graphql-fields": "^2.0.3",
+    "graphql-scalars": "^1.22.4",
+    "prisma": "^5.8.1",
+    "reflect-metadata": "^0.2.1",
+    "ts-node": "^10.9.2",
+    "type-graphql": "^2.0.0-beta.3",
+    "typegraphql-prisma": "^0.27.1"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "5.0.0",
+    "@graphql-codegen/introspection": "4.0.0",
+    "@graphql-codegen/schema-ast": "^4.0.0",
+    "dotenv": "^16.3.1",
+    "nodemon": "^3.0.3",
+    "typescript": "^5.3.3",
+    "@graphql-codegen/typescript": "4.0.1"
+  },
+  "scripts": {
+    "codegen": "graphql-codegen --config codegen.ts",
+    "prisma": "npx prisma generate --schema=./schema.prisma",
+    "dev": "nodemon --watch main.ts --exec \"ts-node main.ts\""
+  }
+}

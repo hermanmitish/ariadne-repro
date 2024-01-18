@@ -1,0 +1,7 @@
+[tool.ariadne-codegen]
+schema_path = "schema.graphql"
+queries_path = "./queries"
+target_package_name = "generated"
+convert_to_snake_case = false
+async_client = false
+include_comments = "none"

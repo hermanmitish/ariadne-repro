@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+}
+
+generator typegraphql {
+  provider              = "typegraphql-prisma"
+  output                = "./generated/typegraphql"
+  useSimpleUpdateInputs = "true"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("MONGO_DB")
+}
+
+model Test1 {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  test4       Test4[]
+  createdById String? @db.ObjectId
+  createdBy   User?   @relation(fields: [createdById], references: [id])
+}
+
+model Test2 {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  name        String  @unique
+  test3       Test3[]
+  test4       Test4[]
+  createdById String? @db.ObjectId
+  createdBy   User?   @relation(fields: [createdById], references: [id])
+}
+
+model Test3 {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  test2Id     String  @db.ObjectId
+  test2       Test2   @relation(fields: [test2Id], references: [id])
+  test4       Test4[]
+  test5Id     String  @db.ObjectId
+  test5       Test5   @relation(fields: [test5Id], references: [id])
+  createdById String? @db.ObjectId
+  createdBy   User?   @relation(fields: [createdById], references: [id])
+}
+
+model Test4 {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  test1Id     String? @db.ObjectId
+  test1       Test1?  @relation(fields: [test1Id], references: [id]) 
+  test2Id     String  @db.ObjectId
+  test2       Test2?  @relation(fields: [test2Id], references: [id])
+  test3Id     String  @db.ObjectId
+  test3       Test3   @relation(fields: [test3Id], references: [id])
+  test5Id     String? @db.ObjectId
+  test5       Test5?  @relation(fields: [test5Id], references: [id])
+  createdById String? @db.ObjectId
+  createdBy   User?   @relation(fields: [createdById], references: [id])
+}
+
+model Test5 {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  test3       Test3[]
+  test4       Test4[]
+  createdById String? @db.ObjectId
+  createdBy   User?   @relation(fields: [createdById], references: [id])
+}
+
+model User {
+  id    String  @id @default(auto()) @map("_id") @db.ObjectId
+  name  String?
+  test1 Test1[]
+  test2 Test2[]
+  test3 Test3[]
+  test4 Test4[]
+  test5 Test5[]
+}

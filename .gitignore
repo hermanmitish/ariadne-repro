@@ -1,0 +1,7 @@
+.conda
+.cache
+.env
+node_modules
+generated/client
+generated/typegraphql
+__pycache__
